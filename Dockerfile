@@ -9,7 +9,7 @@ RUN	git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-d
 	git submodule update --init && \
 	cd ext && \
 	./install.sh && \
-    echo -e "; DataStax PHP Driver\nextension=cassandra.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+    echo extension=cassandra.so > /usr/local/etc/php/conf.d/cassandra.ini
 
 # Install PHP extensions
 RUN pecl install xdebug && \
