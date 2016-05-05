@@ -1,4 +1,4 @@
-FROM php:7.0.5-fpm
+FROM php:7.0.6-fpm
 
 RUN apt-get update && \
     apt-get install -y git wget libssl-dev zlib1g-dev libicu-dev g++ make cmake libuv-dev libgmp-dev
@@ -16,6 +16,8 @@ RUN pecl install xdebug && \
     echo zend_extension=xdebug.so > /usr/local/etc/php/conf.d/xdebug.ini && \
     pecl install apcu && \
     echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini && \
+    pecl install uuid && \
+    echo extension=uuid.so > /usr/local/etc/php/conf.d/uuid.ini && \
     docker-php-ext-install zip mbstring intl
 
 RUN curl -sS https://getcomposer.org/installer | php \
