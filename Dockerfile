@@ -14,7 +14,7 @@ RUN	git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-d
 # Install PHP extensions
 RUN pecl install xdebug && \
     echo zend_extension=xdebug.so > /usr/local/etc/php/conf.d/xdebug.ini && \
-    pecl install apcu && \
+    pecl install apcu-5.1.3 && \
     echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini && \
     pecl install uuid && \
     echo extension=uuid.so > /usr/local/etc/php/conf.d/uuid.ini && \
