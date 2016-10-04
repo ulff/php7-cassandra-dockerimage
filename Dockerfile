@@ -15,9 +15,10 @@ RUN git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-d
 
 # Install PHP extensions
 RUN docker-php-ext-install zip mbstring intl opcache bcmath && \
+    echo extension=bcmath.so > /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini && \
     pecl install xdebug && \
     echo zend_extension=xdebug.so > /usr/local/etc/php/conf.d/xdebug.ini && \
-    pecl install apcu-5.1.3 && \
+    pecl install apcu-5.1.5 && \
     echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini && \
     pecl install uuid && \
     echo extension=uuid.so > /usr/local/etc/php/conf.d/uuid.ini
