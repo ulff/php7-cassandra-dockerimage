@@ -1,4 +1,4 @@
-FROM php:7.1.0-fpm
+FROM php:7.1.4-fpm
 
 RUN apt-get update && \
     apt-get install -y git wget libssl-dev zlib1g-dev libicu-dev g++ make cmake libuv-dev libgmp-dev uuid-dev && \
@@ -8,6 +8,7 @@ RUN apt-get update && \
 # Install datastax php-driver fox cassandra
 RUN git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-driver && \
     cd /usr/src/datastax-php-driver && \
+    git checkout --detach v1.2.2 && \
     git submodule update --init && \
     cd ext && \
     ./install.sh && \
