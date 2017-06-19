@@ -1,7 +1,6 @@
 FROM tetsuobe/php7:v7.1.6
 
 ENV BUILD_DEPS \
-                git \
                 cmake \
                 autoconf \
                 g++ \
@@ -13,7 +12,7 @@ ENV BUILD_DEPS \
                 gmp-dev
 
 RUN apk update && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
-    && apk add --no-cache libuv gmp
+    && apk add --no-cache git libuv gmp
 
 # Install datastax php-driver fox cassandra
 RUN git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-driver \
