@@ -1,7 +1,7 @@
 FROM php:7.1.4-fpm
 
 RUN apt-get update && \
-    apt-get install -y git wget libssl-dev zlib1g-dev libicu-dev g++ make cmake libuv-dev libgmp-dev uuid-dev pcre-dev && \
+    apt-get install -y git wget libssl-dev zlib1g-dev libicu-dev g++ make cmake libuv-dev libgmp-dev uuid-dev && \
     apt-get autoclean -y && \
     apt-get clean -y
 
