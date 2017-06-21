@@ -1,5 +1,7 @@
 FROM tetsuobe/php7:v7.1.6
 
+ENV INSTALL_DIR /usr/src/datastax-php-driver
+
 ENV BUILD_DEPS \
                 cmake \
                 autoconf \
@@ -12,13 +14,11 @@ ENV BUILD_DEPS \
                 gmp-dev
 
 RUN apk update && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
-    && apk add --no-cache git libuv gmp
-
-# Install datastax php-driver fox cassandra
-RUN git clone https://github.com/datastax/php-driver.git /usr/src/datastax-php-driver \
-    && cd /usr/src/datastax-php-driver \
+    && apk add --no-cache git libuv gmp \
+    && git clone https://github.com/datastax/php-driver.git $INSTALL_DIR \
+    && cd $INSTALL_DIR \
     && git submodule update --init \
     && cd ext && ./install.sh \
-    && docker-php-ext-enable cassandra
-
-RUN apk del .build-deps $BUILD_DEPS
+    && docker-php-ext-enable cassandra \
+    && apk del .build-deps \
+    && rm -rf $INSTALL_DIR
